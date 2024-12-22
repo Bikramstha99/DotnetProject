@@ -1,5 +1,0 @@
-D:\EMS.WebApi\EMS.Repository\obj\Debug\net8.0\EMS.Repository.csproj.AssemblyReference.cache
-D:\EMS.WebApi\EMS.Repository\obj\Debug\net8.0\EMS.Repository.GeneratedMSBuildEditorConfig.editorconfig
-D:\EMS.WebApi\EMS.Repository\obj\Debug\net8.0\EMS.Repository.AssemblyInfoInputs.cache
-D:\EMS.WebApi\EMS.Repository\obj\Debug\net8.0\EMS.Repository.AssemblyInfo.cs
-D:\EMS.WebApi\EMS.Repository\obj\Debug\net8.0\EMS.Repository.csproj.CoreCompileInputs.cache
