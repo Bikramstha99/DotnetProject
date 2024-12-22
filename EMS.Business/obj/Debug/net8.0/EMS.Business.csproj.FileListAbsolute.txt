@@ -1,0 +1,5 @@
+D:\EMS.WebApi\EMS.Business\obj\Debug\net8.0\EMS.Business.csproj.AssemblyReference.cache
+D:\EMS.WebApi\EMS.Business\obj\Debug\net8.0\EMS.Business.GeneratedMSBuildEditorConfig.editorconfig
+D:\EMS.WebApi\EMS.Business\obj\Debug\net8.0\EMS.Business.AssemblyInfoInputs.cache
+D:\EMS.WebApi\EMS.Business\obj\Debug\net8.0\EMS.Business.AssemblyInfo.cs
+D:\EMS.WebApi\EMS.Business\obj\Debug\net8.0\EMS.Business.csproj.CoreCompileInputs.cache

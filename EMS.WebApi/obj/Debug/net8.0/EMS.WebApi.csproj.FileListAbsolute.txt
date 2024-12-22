@@ -1,0 +1,6 @@
+D:\EMS.WebApi\EMS.WebApi\obj\Debug\net8.0\EMS.WebApi.csproj.AssemblyReference.cache
+D:\EMS.WebApi\EMS.WebApi\obj\Debug\net8.0\EMS.WebApi.GeneratedMSBuildEditorConfig.editorconfig
+D:\EMS.WebApi\EMS.WebApi\obj\Debug\net8.0\EMS.WebApi.AssemblyInfoInputs.cache
+D:\EMS.WebApi\EMS.WebApi\obj\Debug\net8.0\EMS.WebApi.AssemblyInfo.cs
+D:\EMS.WebApi\EMS.WebApi\obj\Debug\net8.0\EMS.WebApi.csproj.CoreCompileInputs.cache
+D:\EMS.WebApi\EMS.WebApi\obj\Debug\net8.0\EMS.WebApi.MvcApplicationPartsAssemblyInfo.cache

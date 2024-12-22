@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "EMS.Common/1.0.0": {
+        "runtime": {
+          "EMS.Common.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "EMS.Common/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
