@@ -1,5 +1,8 @@
 ﻿using EMS.Entities.Dtos;
+using EMS.Repository.Interface;
 using EMSBusiness.Interface;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,19 +15,15 @@ namespace EmployeeManagementBusiness.Service
     {
         private readonly AppSettings _appSettings;
         private readonly IHttpContextAccessor _contextAccessor;
-        //private IMemoryCacheService _cache;
-        //private readonly ILoggerManager _logger;
-        //private readonly IAuthenticationRepository _authRepository;
+        private readonly IAuthenticationRepository _authRepository;
 
-        public AuthenticationService(IOptions<AppSettings> appSettings, ILoggerManager logger, IHttpContextAccessor contextAccessor,)
+        public AuthenticationService(IAuthenticationRepository authRepository, IOptions<AppSettings> appSettings, IHttpContextAccessor contextAccessor)
         {
             _appSettings = appSettings.Value;
             _contextAccessor = contextAccessor;
-            _cache = cache;
-            _logger = logger;
             _authRepository = authRepository;
         }
-        public Task<AuthenticationResponse> Authenticate(AuthenticationRequest model)
+        public async Task<AuthenticationResponse> Authenticate(AuthenticationRequest model)
         {
             return await _authRepository.Authenticate(model);
         }

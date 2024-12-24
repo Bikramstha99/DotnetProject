@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\EMS.Common\EMS.Common.csproj" />
     <ProjectReference Include="..\EMS.Entities\EMS.Entities.csproj" />
+    <ProjectReference Include="..\EMS.Repository\EMS.Repository.csproj" />
   </ItemGroup>
 
 </Project>
