@@ -5,7 +5,7 @@ namespace EMS.WebApi.Configurations
 {
     public static class DependencyInjection
     {
-        public static void ConfigureSqlDependencies(this IServiceCollection services, IConfiguration configuration)
+        public static void ConfigureSqlDependencies(this IServiceCollection services, IConfiguration configuration) //extension method
         {
             services.AddDbContext<DataContext>(options => options.UseSqlServer(configuration.GetConnectionString("DBConnection"),
                 providerOptions =>
