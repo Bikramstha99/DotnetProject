@@ -1,4 +1,8 @@
-﻿using EMS.Repository;
+﻿using EmployeeManagementBusiness.Service;
+using EmployeeManagementRepository.Repository;
+using EMS.Repository;
+using EMS.Repository.Interface;
+using EMSBusiness.Interface;
 using Microsoft.EntityFrameworkCore;
 
 namespace EMS.WebApi.Configurations
@@ -17,6 +21,9 @@ namespace EMS.WebApi.Configurations
 
         public static void ConfigureScopedServices(this IServiceCollection services)
         {
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
+
+            services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
         }
     }
 }
