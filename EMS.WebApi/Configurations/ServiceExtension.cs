@@ -45,8 +45,7 @@ namespace EMS.WebApi.Configurations
         }
         public static void ConfigureIdentityServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
-            {}).AddEntityFrameworkStores<DataContext>().AddDefaultTokenProviders();
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<DataContext>().AddDefaultTokenProviders();
 
             services.AddIdentityCore<ApplicationUser>(options => { });//for customizing identity
 

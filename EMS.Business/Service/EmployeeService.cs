@@ -16,6 +16,10 @@ namespace EMS.Business.Service
         {
             _employeeRepository = employeeRepository;
         }
+        public Task<EmployeeInformationApiModel> GetAllEmployeeInformation()
+        {
+            return _employeeRepository.GetAllEmployeeInformation();
+        }
         public Task<EmployeeAddUpdateApiModel> AddUpdateEmployee(EmployeeAddUpdateApiModel employeeAddUpdateApiModel)
         {
             return _employeeRepository.AddUpdateEmployee(employeeAddUpdateApiModel);

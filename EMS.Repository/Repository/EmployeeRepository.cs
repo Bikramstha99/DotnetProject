@@ -10,6 +10,10 @@ namespace EMS.Repository.Repository
 {
     public class EmployeeRepository : IEmployeeRepository
     {
+        public Task<EmployeeInformationApiModel> GetAllEmployeeInformation()
+        {
+            throw new NotImplementedException();
+        }
         public Task<EmployeeAddUpdateApiModel> AddUpdateEmployee(EmployeeAddUpdateApiModel employeeAddUpdateApiModel)
         {
             throw new NotImplementedException();

@@ -9,6 +9,8 @@ namespace EMS.Business.Interface
 {
     public interface IEmployeeService
     {
+        Task<EmployeeInformationApiModel> GetAllEmployeeInformation();
+
         Task<EmployeeAddUpdateApiModel> AddUpdateEmployee(EmployeeAddUpdateApiModel employeeAddUpdateApiModel);
 
     }

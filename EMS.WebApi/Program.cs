@@ -7,8 +7,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.ConfigureSqlDependencies(builder.Configuration);
-builder.Services.ConfigureScopedServices();
-
 
 builder.Services.AddControllers();
 builder.Services.AddHttpContextAccessor();
@@ -33,7 +31,10 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 });
+builder.Services.ConfigureScopedServices();
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
+builder.Services.ConfigureIdentityServices(builder.Configuration);
+
 
 
 var app = builder.Build();

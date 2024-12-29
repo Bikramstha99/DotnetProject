@@ -19,13 +19,13 @@ namespace EMS.WebApi.Controllers
         }
 
         //[Authorize]
-        //[HttpGet("GetAllBooks")]
+        [HttpGet("GetAllEmployeeInformation")]
 
-        //public async Task<IActionResult> Index()
-        //{
-        //    var booksDto = await _bookService.GetAllBooksAsync();
-        //    return Ok(booksDto);
-        //}
+        public async Task<IActionResult> GetAllEmployeeInformation()
+        {
+            var booksDto = await _employeeService.GetAllEmployeeInformation();
+            return Ok();
+        }
 
         //[Authorize(Roles = "Admin")]
         //[Authorize]

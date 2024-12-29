@@ -9,6 +9,7 @@ namespace EMS.Repository.Interface
 {
     public interface IEmployeeRepository
     {
+        Task<EmployeeInformationApiModel> GetAllEmployeeInformation();
         Task<EmployeeAddUpdateApiModel> AddUpdateEmployee(EmployeeAddUpdateApiModel employeeAddUpdateApiModel);
 
     }
