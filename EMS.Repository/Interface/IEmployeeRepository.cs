@@ -10,7 +10,10 @@ namespace EMS.Repository.Interface
     public interface IEmployeeRepository
     {
         Task<EmployeeInformationApiModel> GetAllEmployeeInformation();
-        Task<EmployeeAddUpdateApiModel> AddUpdateEmployee(EmployeeAddUpdateApiModel employeeAddUpdateApiModel);
+        Task<bool> AddUpdateEmployee(EmployeeAddUpdateApiModel employeeAddUpdateApiModel);
+        Task<EmployeeInformationApiModel> GetAllEmployeeInformation(int Id);
+        Task<bool> DeleteEmployee(int Id);
+
 
     }
 }

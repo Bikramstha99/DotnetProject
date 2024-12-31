@@ -20,9 +20,19 @@ namespace EMS.Business.Service
         {
             return _employeeRepository.GetAllEmployeeInformation();
         }
-        public Task<EmployeeAddUpdateApiModel> AddUpdateEmployee(EmployeeAddUpdateApiModel employeeAddUpdateApiModel)
+        public Task<bool> AddUpdateEmployee(EmployeeAddUpdateApiModel employeeAddUpdateApiModel)
         {
             return _employeeRepository.AddUpdateEmployee(employeeAddUpdateApiModel);
+        }
+
+        public Task<EmployeeInformationApiModel> GetEmployeeInformationById(int Id)
+        {
+            return _employeeRepository.GetAllEmployeeInformation(Id);
+        }
+
+        public Task<bool> DeleteEmployee(int Id)
+        {
+            return _employeeRepository.DeleteEmployee(Id);
         }
     }
 }

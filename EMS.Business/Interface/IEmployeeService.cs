@@ -11,7 +11,11 @@ namespace EMS.Business.Interface
     {
         Task<EmployeeInformationApiModel> GetAllEmployeeInformation();
 
-        Task<EmployeeAddUpdateApiModel> AddUpdateEmployee(EmployeeAddUpdateApiModel employeeAddUpdateApiModel);
+        Task<bool> AddUpdateEmployee(EmployeeAddUpdateApiModel employeeAddUpdateApiModel);
+        Task<EmployeeInformationApiModel> GetEmployeeInformationById(int Id);
+        Task<bool> DeleteEmployee(int Id);
+
+
 
     }
 }

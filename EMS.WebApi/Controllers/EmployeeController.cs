@@ -37,18 +37,18 @@ namespace EMS.WebApi.Controllers
         }
 
 
-        //[HttpGet("GetById")]
-        //public async Task<IActionResult> GetMovieById(int id)
-        //{
-        //    var movieDto = await _bookService.GetBookAsync(id);
-        //    return Ok(movieDto);
-        //}
+        [HttpGet("GetEmployeeInformationById")]
+        public async Task<IActionResult> GetEmployeeInformationById(int id)
+        {
+            var movieDto = await _employeeService.GetEmployeeInformationById(id);
+            return Ok(movieDto);
+        }
 
-        //[HttpDelete("Delete")]
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    await _bookService.DeleteBookAsync(id);
-        //    return Ok();
-        //}
+        [HttpDelete("DeleteEmployee")]
+        public async Task<IActionResult> DeleteEmployee(int id)
+        {
+            await _employeeService.DeleteEmployee(id);
+            return Ok();
+        }
     }
 }

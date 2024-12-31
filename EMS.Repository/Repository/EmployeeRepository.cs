@@ -14,7 +14,17 @@ namespace EMS.Repository.Repository
         {
             throw new NotImplementedException();
         }
-        public Task<EmployeeAddUpdateApiModel> AddUpdateEmployee(EmployeeAddUpdateApiModel employeeAddUpdateApiModel)
+        public Task<bool> AddUpdateEmployee(EmployeeAddUpdateApiModel employeeAddUpdateApiModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<EmployeeInformationApiModel> GetAllEmployeeInformation(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteEmployee(int Id)
         {
             throw new NotImplementedException();
         }
