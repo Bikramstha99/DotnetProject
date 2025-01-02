@@ -1,3 +1,4 @@
+using CEHRD.IEMIS.WebAPI.Seeds;
 using EMS.Entities.Dtos;
 using EMS.WebApi.Configurations;
 using Microsoft.OpenApi.Models;
@@ -38,6 +39,7 @@ builder.Services.ConfigureIdentityServices(builder.Configuration);
 
 
 var app = builder.Build();
+await SeedData.InitializeDefaultData(app);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
