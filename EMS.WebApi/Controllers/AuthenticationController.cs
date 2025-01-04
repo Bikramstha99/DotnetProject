@@ -20,6 +20,7 @@ namespace EMS.WebApi.Controllers
             _authenticationService = authenticationService;
             _contextAccessor = contextAccessor;
         }
+        [AllowAnonymous]
         [HttpPost("Authenticate")]
         public async Task<IActionResult> Authenticate([FromBody] AuthenticationRequest model)
         {

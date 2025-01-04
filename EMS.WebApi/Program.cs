@@ -35,11 +35,17 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.ConfigureScopedServices();
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 builder.Services.ConfigureIdentityServices(builder.Configuration);
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowOrigin", builder => builder.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin());
+});
 
 
 
 var app = builder.Build();
 await SeedData.InitializeDefaultData(app);
+app.UseCors("AllowOrigin");
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
