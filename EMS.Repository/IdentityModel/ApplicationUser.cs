@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using EMS.Common.Constant;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -15,6 +16,8 @@ namespace EMS.Repository.IdentityModel
         public string? MiddleName { get; set; }
         [Required]
         public string LastName { get; set; }
+        public UserTypeEnum UserType { get; set; }
+
         public string? Gender { get; set; }
 
     }
