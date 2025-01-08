@@ -12,7 +12,9 @@ namespace EMS.Business.Interface
         Task<bool> CheckIfUserNameExists(string userName);
 
         Task<UserApiModel> CreateUser(UserApiModel model);
-        Task<IEnumerable<RolesApiModel>> GetAllRoles();
+        Task<List<UserApiModel>> GetUser();
+
+        Task<List<RolesApiModel>> GetAllRoles();
         Task<IEnumerable<RolePermissionMappingApiModel>> GetAllPermissionsByRoleId(string roleId);
         Task<IEnumerable<UserRoleMappingApiModel>> GetUserRoleMapping(string userId);
         Task<bool> AddUserRoleMapping(List<UserRoleMappingApiModel> model);

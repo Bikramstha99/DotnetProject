@@ -71,7 +71,21 @@ namespace EMS.Repository.Repository
                 throw ex;
             }
         }
-        public async Task<IEnumerable<RolesApiModel>> GetAllRoles()
+
+        public async Task<List<UserApiModel>> GetUser()
+        {
+            return await _userManager.Users.Select(user => new UserApiModel
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,   
+                LastName = user.LastName,     
+                UserName = user.UserName,
+                Email = user.Email,
+                Gender = user.Gender,      
+                UserType = user.UserType,
+            }).ToListAsync();
+        }
+        public async Task<List<RolesApiModel>> GetAllRoles()
         {
             return await _roleManager.Roles.Select(r => new RolesApiModel
             {

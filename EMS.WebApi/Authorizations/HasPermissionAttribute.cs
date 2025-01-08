@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc;
 using EMS.Business.Interface;
 
-namespace EMS.WebApi
+namespace EMS.WebApi.Authorizations
 {
     public sealed class HasPermissionAttribute : Attribute, IAuthorizationFilter
     {
@@ -22,14 +22,13 @@ namespace EMS.WebApi
 
             if (string.IsNullOrWhiteSpace(roleClaim))
             {
-                // not logged in or role not authorized
                 context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status403Forbidden };
             }
             else
             {
                 var cacheService = context.HttpContext.RequestServices.GetService<IMemoryCacheService>();
                 var permissionList = cacheService?.GetPermissionsFromRole(roleClaim).GetAwaiter().GetResult();
-                if ((permissionList == null || (_permissions.Any() && !_permissions.Intersect(permissionList).Any())) && !isSuperAdminUserType)
+                if ((permissionList == null || _permissions.Any() && !_permissions.Intersect(permissionList).Any()) && !isSuperAdminUserType)
                 {
                     // not logged in or role not authorized
                     context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status403Forbidden };

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EmployeeManagementWebApi.Controllers
+namespace EMS.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

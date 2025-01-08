@@ -26,10 +26,14 @@ namespace EMS.WebApi.Configurations
         {
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IMemoryCacheService, MemoryCacheService>();
 
 
             services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
 
         }
     }

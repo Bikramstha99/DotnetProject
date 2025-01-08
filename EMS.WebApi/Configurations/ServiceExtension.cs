@@ -10,39 +10,37 @@ namespace EMS.WebApi.Configurations
 {
     public static class ServiceExtension
     {
-        public static void ConfigureCors(this IServiceCollection services, IConfiguration configuration)
-        {
-            //var origin = configuration["AppSettings:Audience"];
-            services.AddCors(options =>
-            {
-                options.AddPolicy(name: "EMSPolicy",
-                    builder => builder.AllowAnyOrigin()
-                    .AllowAnyHeader()
-                    .AllowCredentials()
-                    );
-            });
-        }
-
         public static void ConfigureAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddAuthentication(opt =>
             {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
+            })
+            .AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
-                    //Validate the JWT Issuer (iss) claim
                     ValidateIssuer = false,
                     ValidateAudience = false,
-                    ValidateLifetime = true,  
+                    ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["AppSettings:Secret"])),
-                    ClockSkew = TimeSpan.Zero
+                    ClockSkew = TimeSpan.FromMinutes(5)  // Allow some clock skew
+                };
+
+                options.Events = new JwtBearerEvents
+                {
+                    OnAuthenticationFailed = context =>
+                    {
+                        // Log the error
+                        Console.WriteLine($"Authentication failed: {context.Exception.Message}");
+                        return Task.CompletedTask;
+                    }
                 };
             });
         }
+
         public static void ConfigureIdentityServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<DataContext>().AddDefaultTokenProviders();

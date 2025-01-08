@@ -29,7 +29,11 @@ namespace EMS.Business.Service
         {
             return await _userRepository.CreateUser(model);
         }
-        public async Task<IEnumerable<RolesApiModel>> GetAllRoles()
+        public async Task<List<UserApiModel>> GetUser()
+        {
+            return await _userRepository.GetUser();
+        }
+        public async Task<List<RolesApiModel>> GetAllRoles()
         {
             return await _userRepository.GetAllRoles();
         }

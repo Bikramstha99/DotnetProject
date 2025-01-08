@@ -1,4 +1,5 @@
-﻿using EMS.Repository.IdentityModel;
+﻿using EMS.Common.Constant;
+using EMS.Repository.IdentityModel;
 using Microsoft.AspNetCore.Identity;
 using System.Reflection;
 
@@ -15,6 +16,7 @@ namespace CEHRD.IEMIS.WebAPI.Seeds
                 {
                     UserName = "bikramshrestha",
                     Email = "superadmin@gmail.com",
+                    UserType = UserTypeEnum.SuperAdmin,
                     PhoneNumber = "1234567890",
                     EmailConfirmed = true,
                     PhoneNumberConfirmed = true,

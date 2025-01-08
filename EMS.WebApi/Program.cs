@@ -1,50 +1,73 @@
 using CEHRD.IEMIS.WebAPI.Seeds;
+using EMS.Business.Interface;
+using EMS.Business.Service;
 using EMS.Entities.Dtos;
+using EMS.Repository;
 using EMS.WebApi.Configurations;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.ConfigureScopedServices();
+
+builder.Services.ConfigureIdentityServices(builder.Configuration);
 builder.Services.ConfigureSqlDependencies(builder.Configuration);
-
 builder.Services.AddControllers();
-builder.Services.AddHttpContextAccessor();
-
-builder.Services.ConfigureAuthentication(builder.Configuration);
-builder.Services.AddAuthorization();
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options =>
+builder.Services.AddSwaggerGen(opt =>
 {
-    options.SwaggerDoc("v1", new OpenApiInfo
+
+    opt.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
         Title = "EMS API",
-        Description = "API of the EMS System",
-        Contact = new OpenApiContact
-        {
-            Name = "Bikram Shrestha",
-            Email = "admin123@gmail.com",
-            //Url = new Uri(""),
-        }
+        Description = "API listing of the EMS System",
     });
+
+    //opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    //{
+    //    In = ParameterLocation.Header,
+    //    Description = "Please enter token",
+    //    Name = "Authorization",
+    //    Type = SecuritySchemeType.Http,
+    //    BearerFormat = "JWT",
+    //    Scheme = "bearer"
+    //});
+    //opt.AddSecurityRequirement(new OpenApiSecurityRequirement
+    //{
+    //    {
+    //        new OpenApiSecurityScheme
+    //        {
+    //            Reference = new OpenApiReference
+    //            {
+    //                Type=ReferenceType.SecurityScheme,
+    //                Id="Bearer"
+    //            }
+    //        },
+    //        new string[]{}
+    //    }
+    //});
 });
-builder.Services.ConfigureScopedServices();
-builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
-builder.Services.ConfigureIdentityServices(builder.Configuration);
+
+builder.Services.ConfigureAuthentication(builder.Configuration);
+builder.Services.AddMemoryCache();
+
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowOrigin", builder => builder.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin());
+options.AddPolicy("CorsPolicy", builder => builder.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin());
 });
-
-
 
 var app = builder.Build();
 await SeedData.InitializeDefaultData(app);
-app.UseCors("AllowOrigin");
 
 
 // Configure the HTTP request pipeline.
@@ -56,7 +79,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
+app.UseCors("CorsPolicy");
 
 app.MapControllers();
 

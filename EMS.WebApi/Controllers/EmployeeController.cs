@@ -1,6 +1,7 @@
-﻿using EmployeeManagementWebApi.Controllers;
-using EMS.Business.Interface;
+﻿using EMS.Business.Interface;
+using EMS.Common.Constants;
 using EMS.Entities.Dtos.Employee;
+using EMS.WebApi.Authorizations;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EMS.WebApi.Controllers
@@ -20,6 +21,7 @@ namespace EMS.WebApi.Controllers
 
         //[Authorize]
         [HttpGet("GetAllEmployeeInformation")]
+        [HasPermission(PermissionConstant.UserModuleCreateEmployee)]
 
         public async Task<IActionResult> GetAllEmployeeInformation()
         {
@@ -30,7 +32,9 @@ namespace EMS.WebApi.Controllers
         //[Authorize(Roles = "Admin")]
         //[Authorize]
         [HttpPost("AddUpdateEmployee")]
-        public async Task<IActionResult> AddUpdateEmployee([FromForm] EmployeeAddUpdateApiModel employeeAddUpdateApiModel)
+        [HasPermission(PermissionConstant.UserModuleCreateEmployee)]
+
+        public async Task<IActionResult> AddUpdateEmployee(EmployeeAddUpdateApiModel employeeAddUpdateApiModel)
         {
             await _employeeService.AddUpdateEmployee(employeeAddUpdateApiModel);
             return Ok();
@@ -38,6 +42,8 @@ namespace EMS.WebApi.Controllers
 
 
         [HttpGet("GetEmployeeInformationById")]
+        [HasPermission(PermissionConstant.UserModuleShowEmployee)]
+
         public async Task<IActionResult> GetEmployeeInformationById(int id)
         {
             var movieDto = await _employeeService.GetEmployeeInformationById(id);
@@ -45,6 +51,8 @@ namespace EMS.WebApi.Controllers
         }
 
         [HttpDelete("DeleteEmployee")]
+        [HasPermission(PermissionConstant.UserModuleDeleteEmployee)]
+
         public async Task<IActionResult> DeleteEmployee(int id)
         {
             await _employeeService.DeleteEmployee(id);

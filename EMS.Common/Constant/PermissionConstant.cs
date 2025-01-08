@@ -11,6 +11,11 @@ namespace EMS.Common.Constants
         #region USER MODULE PERMISSIONS
         public const string UserModuleAccess ="USR.ModuleAccess";
         public const string UserModuleCreateUser = "USR.CreateUsers";
+        public const string UserModuleCreateEmployee = "USR.CreateEmployee";
+        public const string UserModuleUpdateEmployee = "USR.UpdateEmployee";
+        public const string UserModuleDeleteEmployee = "USR.DeleteEmployee";
+        public const string UserModuleShowEmployee = "USR.ShowEmployee";
+
         #endregion
 
     }

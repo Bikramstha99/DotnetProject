@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.Sockets;
 using System.Security.Claims;
 using System.Text;
 
@@ -18,6 +19,7 @@ namespace EmployeeManagementRepository.Repository
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly DataContext _dbContext;
         private readonly IConfiguration _config;
+
 
         public AuthenticationRepository(DataContext dbContext, UserManager<ApplicationUser> userManager, IConfiguration config) 
         {
@@ -110,24 +112,25 @@ namespace EmployeeManagementRepository.Repository
         private string GenerateJwtToken(AuthenticatedUser user)
         {
             bool isSuperAdmin = user.UserType == (int)UserTypeEnum.SuperAdmin;
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["AppSettings:Secret"]));
 
-            var authclaims = new[] {
+
+            var claims = new[] {
                 new Claim(ClaimConstants.UniqueName, user.UniqueName),
                 new Claim(ClaimConstants.Role, user.Role),
                 new Claim(ClaimConstants.UserType, user.UserType.ToString()),
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Secret").Value!));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-            var expiretime = DateTime.Now.AddHours(1);
-            var tokenDescriptor = new JwtSecurityToken(
-                claims: authclaims,
-                expires: expiretime,
-                signingCredentials: creds
-                );
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.Now.AddDays(1),
+                SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature)
+            };
 
-            var jwt = new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
-            return jwt;
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
         }
     }
 }

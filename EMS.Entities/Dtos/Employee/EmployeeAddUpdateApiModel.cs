@@ -8,9 +8,7 @@ namespace EMS.Entities.Dtos.Employee
 {
     public class EmployeeAddUpdateApiModel
     {
-        public string EmployeeName {  get; set; }
-        public string DOB {  get; set; }
-        public decimal Salary {  get; set; }
+        public string? Name {  get; set; }
 
     }
 }

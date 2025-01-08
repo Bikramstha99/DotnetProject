@@ -1,5 +1,4 @@
-﻿using EmployeeManagementWebApi.Controllers;
-using EMS.Entities.Dtos;
+﻿using EMS.Entities.Dtos;
 using EMSBusiness.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

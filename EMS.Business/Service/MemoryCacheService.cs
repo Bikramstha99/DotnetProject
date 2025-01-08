@@ -13,7 +13,7 @@ namespace EMS.Business.Service
         private static readonly SemaphoreSlim semaphore = new SemaphoreSlim(1, 1);
         private readonly IApplicationUserRepository _applicationUser;
         private readonly MemoryCacheEntryOptions cacheEntryOptions;
-        public MemoryCacheService(IMemoryCache cache,IApplicationUserRepository applicationUser)
+        public MemoryCacheService(IMemoryCache cache, IApplicationUserRepository applicationUser)
         {
             _cache = cache;
             _applicationUser = applicationUser;
@@ -30,31 +30,26 @@ namespace EMS.Business.Service
             List<RolePermissionCache> rolePermissions = new List<RolePermissionCache>();
             if (_cache.TryGetValue("permissions", out rolePermissions))
             {
-                throw new Exception("Permissions already exist in cache.");
                 //_logger.LogInfo($"Perm list found in cache, no semaphore required. Count = {rolePermissions.Count()}");
             }
             else
             {
                 try
                 {
-                    new Exception("Permissions already exist in cache.");
                     //_logger.LogInfo($"Semaphore For RolePermCache Started");
                     await semaphore.WaitAsync();
 
                     if (_cache.TryGetValue("permissions", out rolePermissions))
                     {
-                        throw new Exception("Permissions already exist in cache.");
                     }
                     else
                     {
                         rolePermissions = await _applicationUser.GetRoleWisePermissionList();
-                        throw new Exception("Permissions  released in cache.");
                         _cache.Set("permissions", rolePermissions, cacheEntryOptions);
                     }
                 }
                 finally
                 {
-                    throw new Exception("Permissions released in cache.");
                     semaphore.Release();
                 }
             }
@@ -64,7 +59,6 @@ namespace EMS.Business.Service
                 permissionNames.AddRange(item.Permissions);
             }
 
-            throw new Exception("Permissions count cache.");
             return permissionNames.Distinct().ToList();
         }
 

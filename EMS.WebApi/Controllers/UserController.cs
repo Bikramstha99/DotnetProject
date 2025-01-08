@@ -2,14 +2,17 @@
 using EMS.Common.Constants;
 using EMS.Entities.Dtos.User;
 using EMS.Entities.Models;
+using EMS.WebApi.Authorizations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Buffers.Text;
 
 namespace EMS.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UserController : BaseController
     {
         IUserService _userService;
         public UserController(IUserService userService)
@@ -33,8 +36,20 @@ namespace EMS.WebApi.Controllers
                 throw;
             }
         }
-        [HttpGet("GetAllRoles")]
+        [HttpGet("GetUser")]
         [HasPermission(PermissionConstant.UserModuleCreateUser)]
+        public async Task<IActionResult> GetUser()
+        {
+            try
+            {
+                return Ok(new { data = await _userService.GetUser() });
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        [HttpGet("GetAllRoles")]
         public async Task<IActionResult> GetAllRoles()
         {
             try
@@ -47,7 +62,6 @@ namespace EMS.WebApi.Controllers
             }
         }
         [HttpGet("GetPermissionsOfRole")]
-        [HasPermission(PermissionConstant.UserModuleCreateUser)]
         public async Task<IActionResult> GetPermissionsOfRole(string roleId)
         {
             try
@@ -61,6 +75,7 @@ namespace EMS.WebApi.Controllers
         }
 
         [HttpGet("GetUserRoleMapping")]
+
         public async Task<IActionResult> GetUserRoleMapping(string userId)
         {
             try
