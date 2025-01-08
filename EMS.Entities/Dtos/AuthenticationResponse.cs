@@ -17,11 +17,6 @@ namespace EMS.Entities.Dtos
         public int UserType { get; set; }
         public string Role { get; set; }
         public IList<string> Permissions { get; set; }
-        public bool IsActive { get; set; }
-        public bool? IsUsed { get; set; }
-        public int Province { get; set; }
-        public int District { get; set; }
-        public int Municipality { get; set; }
     }
 
 

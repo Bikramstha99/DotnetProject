@@ -47,7 +47,8 @@ namespace EmployeeManagementRepository.Repository
                             await _dbContext.SaveChangesAsync();
                         }
 
-                        return await GetUserWithTokenDetailsFromApplicationUser(user);
+                         var details = await GetUserWithTokenDetailsFromApplicationUser(user);
+                        return details;
                     }
                     else
                     {
