@@ -16,8 +16,8 @@ namespace EMS.WebApi.Authorizations
 
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            var roleClaim = context.HttpContext.User.Claims.FirstOrDefault(e => e.Type == ClaimConstants.Role).Value;
-            var userTypeVal = context.HttpContext.User.Claims.FirstOrDefault(e => e.Type == ClaimConstants.UserType).Value;
+            var roleClaim = context.HttpContext.User.Claims.FirstOrDefault(e => e.Type == ClaimConstants.Role)?.Value;
+            var userTypeVal = context.HttpContext.User.Claims.FirstOrDefault(e => e.Type == ClaimConstants.UserType)?.Value;
             bool isSuperAdminUserType = (UserTypeEnum)Convert.ToInt16(userTypeVal) == UserTypeEnum.SuperAdmin;
 
             if (string.IsNullOrWhiteSpace(roleClaim))
